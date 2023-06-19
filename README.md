@@ -18,7 +18,10 @@ A simple blog application built with Flask, a lightweight web application framew
    git clone https://github.com/username/flask-blog.git
    cd flask-blog
 
-2. pip install -r requirements.txt
+2. Install the dependencies:
+
+   ```bash pip install -r requirements.txt
+   ```
 
 3. Run the application:
 
