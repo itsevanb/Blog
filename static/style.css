@@ -59,3 +59,51 @@ h1 {
     margin: 10px 0;
     line-height: 1.6;
 }
+
+.delete-button {
+    background-color: #ff4c4c;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: background-color 0.4s ease;
+    float: right;
+    position: relative;
+    top: -45px;
+}
+
+.delete-button:hover {
+    background-color: #e33e3e;
+}
+
+.post-actions {
+    display: none;
+}
+
+.post:hover .post-actions {
+    display: block;
+}
+
+.post-button {
+    display: inline-block;
+}
+
+.update-button {
+    background-color: #ff9505;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.4s ease;
+}
+
+.update-button:hover {
+    background-color: #CC7A00;
+}

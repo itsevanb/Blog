@@ -14,6 +14,12 @@
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
         <p><b>Author: </b>{{ post.author}}</p>
+        <form action="/delete/{{ post.id }}" method="POST">
+            <input type="submit" value="Delete" class="delete-button">
+        </form>
+        <form action="/update/{{ post.id }}" method="GET" class="post-button">
+            <input type="submit" value="Update" class="update-button">
+        </form>
     </div>
     {% endfor %}
 </body>

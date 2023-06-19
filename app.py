@@ -18,8 +18,7 @@ def index():
 @app.route('/save')
 def save_data():
     data = [
-        {'id': 1, 'author': "John Doe", 'title': "First Post", 'content': "This is my first post"},
-        {'id': 2, 'author': "Jane Doe", 'title': "Second Post", 'content': "This is my second post"},
+        {}
     ]
 
     try:
@@ -57,6 +56,55 @@ def add():
     
     
     return render_template('add.html')
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    try:
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        data = []
+
+    data = [post for post in data if post['id'] != id]
+
+    try:
+        with open('data.json', 'w') as f:
+            json.dump(data, f)
+    except Exception as e:
+        print(f"Error writing file: {e}")
+        return "Error saving data"
+    
+    return redirect(url_for('index'))
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    try:
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+    
+    post = next((post for post in data if post['id'] == id), None)
+
+    if request.method == 'POST':
+        #update the post in the JSON file
+        #redirect back to index page
+        post_update = request.form
+        post['title'] = post_update['title']
+        post['author'] = post_update['author']
+        post['content'] = post_update['content']
+
+        try:
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+        except Exception as e:
+            print(f"Error writing file: {e}")
+            return "Error saving data"
+        return redirect(url_for('index'))
+
+    
+    return render_template('update.html', post=post)
 
 
 if __name__ == '__main__':
