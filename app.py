@@ -43,8 +43,9 @@ def add():
             print(f"Error reading file: {e}")
             data = []
 
-        new_data = {'id': len(data) + 1, 'author': author, 'title': title, 'content': content}
+        new_data = {'id': len(data) + 1, 'author': author, 'title': title, 'content': content, 'like': 0}
         data.append(new_data)
+        
         try:
             with open('data.json', 'w') as f:
                 json.dump(data, f)
@@ -105,6 +106,30 @@ def update(id):
 
     
     return render_template('update.html', post=post)
+
+@app.route('/like/<int:id>', methods=['POST'])
+def like(id):
+    #adds like button to post
+    try:
+        with open('data.json', 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Error reading file: {e}")
+    
+    post = next((post for post in data if post['id'] == id), None)
+
+    if post:
+        if 'likes' not in post:
+            post['likes'] = 0 
+        post['likes'] += 1
+
+        try:
+            with open('data.json', 'w') as f:
+                json.dump(data, f)
+        except Exception as e:
+            print(f"Error writing file: {e}")
+            return "Error saving data"
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':

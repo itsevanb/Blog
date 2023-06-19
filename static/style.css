@@ -107,3 +107,20 @@ h1 {
 .update-button:hover {
     background-color: #CC7A00;
 }
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 2px 5px;
+}
+
+.like-button:hover {
+    color: #1da1f2;
+}
+
+.like-button:active {
+    transform: scale(1.2);
+}
